@@ -1,4 +1,8 @@
 # stage_juin
+Realisation d un portfolio sous symfony dans le cadre du stage de la RAN numerique suivi en juin2021
+
+
+### istructions de mise en route->
 
 ### Installer les dépendances/vendor    
 composer install  
