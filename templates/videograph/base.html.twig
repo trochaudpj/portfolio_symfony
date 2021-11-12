@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/elegant-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(template ~ '/css/style.css') }}">
+
+       
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">                
+                        <a href="{{ path('home') }}"><img src="{{ asset(template ~ '/img/logo.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__nav__option">
+                        <nav class="header__nav__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="{{ path('home') }}">Home</a></li>
+                                <li><a href="{{ path('about') }}">About</a></li>
+                                <li><a href="{{ path('portfolio') }}">Portfolio</a></li>
+                                <li><a href="{{ path('services') }}">Services</a></li>
+                                <li><a href="#">recap</a>
+                                    <ul class="dropdown">
+                                        
+                                        <li><a href="{{ path('admin_configuration') }}">AdminGeneral</a></li>
+                                        <li><a href="{{ path('admin') }}">Admin</a></li>
+                                        <li><a href="{{ path('services') }}">Services</a></li>
+                                        <li><a href="{{ path('blog') }}">Articles</a></li>
+                                        <li><a href="{{ path('blog_create') }}">Articles_edit</a></li>
+                                    </ul>
+                                <li>{% if not app.user %}<a href="{{ path('app_login') }}">Login</a>{% else %}<a href="{{ path('app_logout') }}">Logout</a>{% endif %}</li>
+                                </li>
+                                <li><a href="{{ path('contact') }}">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__nav__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+        {% block body %}{% endblock %}
+
+            <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top__logo">
+                            <a href="#"><img src="{{ asset(template ~ '/img/logo.png') }}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__option">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="footer__option__item">
+                            <h5>About us</h5>
+                            <p>Formed in 2006 by Matt Hobbs and Cael Jones, Videoprah is an award-winning, full-service
+                                production company specializing.</p>
+                            <a href="#" class="read__more">Read more <span class="arrow_right"></span></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-3">
+                        <div class="footer__option__item">
+                            <h5>Who we are</h5>
+                            <ul>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Carrers</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Locations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-3">
+                        <div class="footer__option__item">
+                            <h5>Our work</h5>
+                            <ul>
+                                <li><a href="#">Feature</a></li>
+                                <li><a href="#">Latest</a></li>
+                                <li><a href="#">Browse Archive</a></li>
+                                <li><a href="#">Video for web</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer__option__item">
+                            <h5>Newsletter</h5>
+                            <p>Videoprah is an award-winning, full-service production company specializing.</p>
+                            <form action="#">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fa fa-send"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p class="footer__copyright__text">Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <script src="{{ asset(template ~ '/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset(template ~ '/js/main.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    locale: 'fr'
+    app_env: '%env(resolve:APP_ENV)%'
+    database: '%env(resolve:DATABASE_URL)%'
+    email_dev: '%env(resolve:MAILER_DEV)%'
+    app_root: '%kernel.project_dir%'
+    maxSizePicture: '5242880'
+    extensionsPhotos: ['png', 'jpg', 'jpeg']
+    mimeTypePhotos: ['image/png', 'image/jpeg', 'image/pjpeg']
+    extensionsVideos: ['avi', 'mpeg', 'mp4', 'quicktime']
+    mimeTypeVideos: ['video/x-msvideo', 'video/mpeg', 'video/mp4', 'video/quicktime']
+    extensionsZip: ['zip']
+    mimeTypeZip: ['application/zip']
+    recaptchaPublic: '%env(resolve:RECAPTCHA_PUBLIC)%'
+    recaptchaPrivate: '%env(resolve:RECAPTCHA_PRIVATE)%'
+    googleApiPublic: '%env(resolve:API_GOOGLE_CLIENT_ID)%'
+    googleApiSecret: '%env(resolve:API_GOOGLE_CLIENT_SECRET)%'
+    minify_css: ['public/css', 'trumbowyg']
+    minify_js: ['public/js', 'public/js/jquery']
+    server_upload_default_path: '%kernel.project_dir%/public/upload'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $uploadPath: '%server_upload_default_path%'
+            $assetsHelper: '@assets.packages'
+            $kernelProjectDir: '%kernel.project_dir%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    # Api google
+    # Recaptcha
+    App\Api\Google\Recaptcha\Recaptcha:
+        arguments:
+            $publicKey: '%recaptchaPublic%'
+            $privateKey: '%recaptchaPrivate%'
+
+    # Evénement sur le multi langues
+    App\EventSubscriber\LocaleSubscriber:
+        arguments: 
+            $defaultLocale: '%kernel.default_locale%'
+            $configurationService: '@App\Service\ConfigurationService'
+
+    App\EventSubscriber\UserLocaleSubscriber:
+        arguments: 
+            $defaultLocale: '%kernel.default_locale%'
+            $userRepository: '@App\Repository\UserRepository'

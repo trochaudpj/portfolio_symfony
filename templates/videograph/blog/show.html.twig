@@ -1,0 +1,145 @@
+{% extends template ~ '/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+	.example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+	.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+
+
+ <!-- Blog Details Hero Begin -->
+<section class="blog-hero spad set-bg" data-setbg={{ asset(template ~ '/img/blog/blog-hero.jpg') }}>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="blog__hero__text">
+                    <h2>{{ article.title }}</h2>
+                    <ul>
+                        <li>par <span>Krista Starkes</span></li>
+                        <li>{{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}</li>
+                        <li>{{article.comments|length}} Comment</li> 
+                        <li>catégorie : {{article.category.title}} </li> 
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Blog Details Hero End -->
+    <!-- Blog Details Section Begin -->
+<div class="blog-details spad">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="blog__details__content">
+                    <div class="blog__details__text">
+                        <img src="{{ article.image }}" alt="">
+                        {{ article.content | raw }}
+                        
+                    <div class="blog__details__tags">
+                        <span><i class="fa fa-tag"></i> Tag:</span>
+                        <a href="#">Wedding</a>
+                        <a href="#">Event</a>
+                        <a href="#">Couple</a>
+                    </div>
+                    <div class="blog__details__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <a href="{{ path('blog_show', {'id': prev_article.id }) }}" class="blog__details__option__item">
+                                    <h5><i class="fa fa-angle-left"></i> Previous posts</h5>
+                                    <div class="blog__details__option__item__img">
+                                        <img src="{{ asset(template ~ '/img/blog/prev.jpg') }}" alt="">
+                                    </div>
+                                    <div class="blog__details__option__item__text">
+                                        <h6>{{ prev_article.title }}</h6>
+                                        <span>{{ prev_article.createdAt | date('d/m/Y') }} à {{ prev_article.createdAt | date('H:i') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <a href="{{ path('blog_show', {'id': next_article.id }) }}" class="blog__details__option__item blog__details__option__item--right">
+                                    <h5>Next posts <i class="fa fa-angle-right"></i></h5>
+                                    <div class="blog__details__option__item__img">
+                                        <img src="{{ asset(template ~ '/img/blog/next.jpg') }}" alt="">
+                                    </div>
+                                    <div class="blog__details__option__item__text">
+                                        <h6>{{ next_article.title }}</h6>
+                                        <span>{{ next_article.createdAt | date('d/m/Y') }} à {{ next_article.createdAt | date('H:i') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog__details__recent">
+                        <h4>Recent Posts</h4>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="blog__details__recent__item">
+                                    <img src="img/blog/ri-1.jpg" alt="">
+                                    <h5>What are the steps of a body lift procedure?</h5>
+                                    <span>Dec 06, 2019</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="blog__details__recent__item">
+                                    <img src="img/blog/ri-2.jpg" alt="">
+                                    <h5>What are the steps of a body lift procedure?</h5>
+                                    <span>Dec 06, 2019</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="blog__details__recent__item">
+                                    <img src="img/blog/ri-3.jpg" alt="">
+                                    <h5>How to shop for a cosm surgery procedure</h5>
+                                    <span>Dec 06, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-details spad">
+                        <section id="commentaire" class="testimonial spad set-bg" data-setbg="{{ asset(template ~ '/img/testimonial-bg.jpg') }}">
+                            <div class="container">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="blog__details__content">
+                                            {% for comment in article.comments %}
+                                                <div class="blog__details__quote">
+                                                    <div class="row">
+                                                            <div class="col">                                           
+                                                            
+                                                            <p>{{ comment.content | raw }}</p>
+                                                            <h6>{{ comment.author | raw }} (<small>Publié le {{comment.createdAt | date('d/m/Y à H:i')}}</small>)</h6>
+                                                            <i class="fa fa-quote-right"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="blog__details__comment">
+                        <h4>Leave a comment</h4>
+                        <form action="#">
+                            <div class="input__list">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Email">
+                                <input type="text" placeholder="Website">
+                            </div>
+                            <textarea placeholder="Comment"></textarea>
+                            <button type="submit" class="site-btn">Send Message</button><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Details Section End -->
+{% endblock %}

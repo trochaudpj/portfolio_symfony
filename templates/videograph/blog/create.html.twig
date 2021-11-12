@@ -1,0 +1,47 @@
+{% extends template ~ '/base.html.twig' %}
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+{% block title %}Edition{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb Begin -->                     
+    <div class="breadcrumb-option spad set-bg" data-setbg={{ asset(template ~ '/img/breadcrumb-bg.jpg') }}>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Edition Blog</h2>
+                        <div class="breadcrumb__links">
+                            <a href="{{ path('home') }}">Home</a>
+                            <span>Edition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    {% if editMode %}
+    Edition Article
+    {% else %}        
+    Ajouter un Article
+    {% endif %}
+
+{{ form_start(formArticle) }}
+
+{{ form_row(formArticle.title, {'attr': {'placeholder':"Titre de l'article"}}) }}
+{{ form_row(formArticle.category) }}
+{{ form_row(formArticle.content, {'attr':{'placeholder':"Contenu de l'article"}}) }}
+{{ form_row(formArticle.image, {'attr':{'placeholder':"URL de l'Image"}}) }}
+
+<button type="submit" class="btn btn-sucess">
+    {% if editMode %}
+    Enregistrer Modification
+    {% else %}        
+    Ajouter
+    {% endif %}
+</button>
+
+{{ form_end(formArticle) }}
+
+{% endblock %}

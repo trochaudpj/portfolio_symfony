@@ -1,0 +1,99 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ 'CONFIGURATION-GENERALE'|trans }}{% endblock %}
+
+
+{% block body %}
+<div class="content">
+    <section class="content-header">
+        <div class="d-flex flex-row justify-content-between align-content-center w-100">
+            <div class="content-header-title">
+                <h1 class="title">{{ 'CONFIGURATION-GENERALE'|trans }}</h1>
+            </div>
+        </div>
+    </section>
+    
+    <section id="main" class="content-body block-easyadmin">
+        <form action="{{ redirect }}" id="form" method="POST" autocomplete="off">
+            <input type="hidden" name="token" id="token" value="{{ token }}">
+            <div class="container">
+                <div class="row">
+                    {% for key, options in config %}
+                    <div class="col-12 col-md-6">
+                        <fieldset>
+                            <legend><span class="fa fa-pencil fa-1 mr-1"></span>{{ options.label|upper|trans }}</legend>
+                            {% for Skey, Stag in options.tabs %}
+                                <div class="mt-3">
+                                    <label for="{{ Skey }}" class="text-left mb-1 ml-1">{% if Stag.label != '' %}{{ Stag.label|upper|trans }}{% else %}{{ Skey|upper|trans }}{% endif %}</label>
+                                    {% if Stag.type == 'text' %}
+                                        <input type="text" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" value="{{ Stag.value }}" class="form-control" aria-describedby="{{ Skey }}-help">
+                                    {% endif %}
+                                    {% if Stag.type == 'email' %}
+                                        <input type="email" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" value="{{ Stag.value }}" class="form-control" aria-describedby="{{ Skey }}-help">
+                                    {% endif %}
+                                    {% if Stag.type == 'date' %}
+                                        <input type="month" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" value="{{ Stag.value }}" class="form-control" aria-describedby="{{ Skey }}-help">
+                                    {% endif %}
+                                    {% if Stag.type == 'password' %}
+                                        <input autocomplete="new-password" type="password" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" value="{{ Stag.value }}" class="form-control" aria-describedby="{{ Skey }}-help">
+                                    {% endif %}
+                                    {% if Stag.type == 'integer' %}
+                                        <input type="number" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" value="{{ Stag.value }}" class="form-control" aria-describedby="{{ Skey }}-help">
+                                    {% endif %}
+                                    {% if Stag.type == 'boolean' %}
+                                        <div class="ml-1">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]-true" value="true" class="custom-control-input"{% if Stag.value == 'true' %} checked{% endif %}>
+                                                <label class="custom-control-label" for="{{ key }}[tabs][{{ Skey }}][value]-true">{{ 'YES'|trans }}</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]-false" value="false" class="custom-control-input"{% if Stag.value == 'false' %} checked{% endif %}>
+                                                <label class="custom-control-label" for="{{ key }}[tabs][{{ Skey }}][value]-false">{{ 'NO'|trans }}</label>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if Stag.type == 'select' %}
+                                        <select name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" class="form-control" aria-describedby="{{ Skey }}-help">
+                                            <option value="">{{ 'SELECTED'|trans }}</option>
+                                            {% for Sk, Sv in Stag.list %}
+                                            <option value="{{ Sk }}"{% if Stag.value == Sk %} selected{% endif %}>{{ Sv }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}
+                                    {% if Stag.type == 'selectList' %}
+                                        {% set selectList = [] %}
+                                        {% if Stag.selectList in _context|keys %}
+                                            {% for Kcontext, Vcontext in _context %}
+                                                {% if Stag.selectList == Kcontext %}
+                                                {% set selectList = Vcontext %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <select name="{{ key }}[tabs][{{ Skey }}][value]" id="{{ key }}[tabs][{{ Skey }}][value]" class="form-control" aria-describedby="{{ Skey }}-help">
+                                            <option value="">{{ 'SELECTED'|trans }}</option>
+                                            {% if not selectList is empty %}
+                                                {% for selectList in selectList %}
+                                                <option value="{{ selectList }}"{% if Stag.value == selectList %} selected{% endif %}>{{ selectList }}</option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    {% endif %}
+                                    <small id="{{ Skey }}-help" class="form-text text-muted text-justify px-1 mb-3">{{ Stag.help|upper|trans|raw }}</small>
+                                </div>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary action-save">
+                        <span class="btn-label">{{ 'SAVE-MODIFICATIONS'|trans }}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}

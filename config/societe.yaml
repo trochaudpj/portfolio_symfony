@@ -1,0 +1,12 @@
+societe:
+    label: SOCIETE
+    tabs: { name: { label: SOCIETE-NAME, type: text, length: 100, value: plateformweb, help: '' }, juridique: { label: SOCIETE-JURIDIQUE, type: text, length: 100, value: micro-entreprise, help: '' }, url: { label: SOCIETE-URL, type: url, length: 255, value: 'https://plateformweb.com', help: '' }, imageSocial: { label: SOCIETE-IMAGE-SOCIAL, type: file, length: 255, value: default.jpg, help: '' }, siret: { label: SOCIETE-SIRET, type: text, length: 255, value: '528 172 521 000 23', help: '' }, fax: { label: SOCIETE-FAX, type: text, length: 255, value: '', help: '' }, phone: { label: SOCIETE-PHONE, type: text, length: 255, value: '+33 6 64 17 82 35', help: '' }, email: { label: EMAIL, type: email, length: 255, value: ferrerofranck@plateformweb.com, help: '' }, adresse: { label: ADRESSE, type: text, length: 255, value: '17 rue saint wendelin, 67350 Val-de-Moder/Uberach', help: '' } }
+bank:
+    label: BANK
+    tabs: { iban: { label: IBAN, type: text, length: 80, value: '', help: '' }, bic: { label: BIC, type: text, length: 80, value: '', help: '' } }
+view:
+    label: VIEW-SOCIETE
+    tabs: { adresse: { label: VIEW-ADRESSE, type: boolean, value: 'true', help: '' }, email: { label: VIEW-EMAIL, type: boolean, value: 'true', help: '' }, phone: { label: VIEW-PHONE, type: boolean, value: 'true', help: '' }, fax: { label: VIEW-FAX, type: boolean, value: 'true', help: '' }, siret: { label: VIEW-SIRET, type: boolean, value: 'true', help: '' }, map: { label: VIEW-MAP, type: boolean, value: 'true', help: '' }, vcard: { label: VIEW-VCARD, type: boolean, value: 'true', help: '' }, qrcode: { label: VIEW-QRCODE, type: boolean, value: 'true', help: '' } }
+map:
+    label: GOOGLE-MAP
+    tabs: { map: { label: '', type: text, length: 255, value: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.329099855637!2d7.620906615403214!3d48.851934509115765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47969722ef7b3629%3A0xdf08403532c89468!2s17%20Rue%20Saint-Wendelin%2C%2067350%20Val-de-Moder!5e0!3m2!1sfr!2sfr!4v1597910790599!5m2!1sfr!2sfr', help: '' } }

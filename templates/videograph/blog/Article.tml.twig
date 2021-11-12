@@ -1,0 +1,13 @@
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="blog__item">
+        <h4><a href="{{ path('article.show', {slug:article.slug, id: article.id})}}">
+            {{ article.title }}
+        </a></h4>
+        <ul>
+            <li>Le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}</li>
+            <li>{{article.comments|length}} Commentaires</li>
+        </ul>
+        <p> {{ article.content | u.truncate(100, '...', false) | raw }}</p>
+        <a href="{{ path('blog_show', {'id': article.id }) }}">Read more <span class="arrow_right"></span></a>
+    </div>
+</div> 

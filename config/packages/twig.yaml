@@ -1,0 +1,14 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        local: '%locale%'
+        configuration: '@App\Service\ConfigurationService'
+        societe: '@App\Service\SocieteService'
+        social: '@App\Service\SocialService'
+
+when@test:
+    twig:
+        strict_variables: true

@@ -1,0 +1,18 @@
+{% extends template ~ '/base.html.twig' %}
+
+{% block title %}Regillster{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <h1>Register</h1>
+        {{form_start(form)}}
+        {{form_widget(form)}}
+        <button type="submit" class="btn btn-success">Valid<button>
+        {{form_end(form)}}
+       
+    </div>
+{% endblock %}
